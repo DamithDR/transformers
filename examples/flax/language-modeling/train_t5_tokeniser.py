@@ -7,7 +7,7 @@ vocab_size = 32_000
 input_sentence_size = None
 
 # Initialize a dataset
-dataset = datasets.load_dataset("joelniklaus/Multi_Legal_Pile", name="en_all", split="train", cache_dir="/experiments/dpremasiri/transformers/examples/flax/language-modeling/cache/")
+dataset = datasets.load_dataset("joelniklaus/Multi_Legal_Pile", name="en_all", split="train", cache_dir="/experiments/dpremasiri/transformers/examples/flax/language-modeling/cache/huggingface/")
 
 tokenizer = SentencePieceUnigramTokenizer(unk_token="<unk>", eos_token="</s>", pad_token="<pad>")
 
