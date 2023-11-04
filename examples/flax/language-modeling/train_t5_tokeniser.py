@@ -31,7 +31,7 @@ tokenizer.train_from_iterator(
 # Save files to disk
 tokenizer.save("./LegalT5-base/tokenizer.json")
 
-from transformers import T5Config
-
-config = T5Config.from_pretrained("google/t5-v1_1-base", vocab_size=tokenizer.get_vocab_size())
-config.save_pretrained("./LegalT5-base")
+# from transformers imporLegalT5-baset T5Config
+#
+# config = T5Config.from_pretrained("google/t5-v1_1-base", vocab_size=tokenizer.get_vocab_size())
+# config.save_pretrained("./LegalT5-base")
