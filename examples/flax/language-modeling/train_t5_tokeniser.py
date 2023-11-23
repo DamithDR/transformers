@@ -1,13 +1,13 @@
 import datasets
 
 from t5_tokenizer_model import SentencePieceUnigramTokenizer
-
+from transformers import T5Config
 
 vocab_size = 32_000
 input_sentence_size = None
 
 # Initialize a dataset
-dataset = datasets.load_dataset("joelniklaus/Multi_Legal_Pile", name="en_all", split="train", cache_dir="/mnt/disks/persist/huggingface/")
+dataset = datasets.load_dataset("joelniklaus/Multi_Legal_Pile", name="en_legislation", split="train")
 
 tokenizer = SentencePieceUnigramTokenizer(unk_token="<unk>", eos_token="</s>", pad_token="<pad>")
 
@@ -32,6 +32,6 @@ tokenizer.train_from_iterator(
 tokenizer.save("./LegalT5-base/tokenizer.json")
 
 # from transformers imporLegalT5-baset T5Config
-#
-# config = T5Config.from_pretrained("google/t5-v1_1-base", vocab_size=tokenizer.get_vocab_size())
-# config.save_pretrained("./LegalT5-base")
+
+config = T5Config.from_pretrained("google/t5-v1_1-base", vocab_size=tokenizer.get_vocab_size())
+config.save_pretrained("./LegalT5-base")
