@@ -26,7 +26,7 @@ def run(args):
             input_sentence_size = len(dataset)
         batch_length = 100
         for i in range(0, input_sentence_size, batch_length):
-            yield dataset[i: i + batch_length]["text"]
+            yield dataset[i: i + batch_length][args.field]
 
     start = time.time()
     # Train tokenizer
@@ -61,5 +61,6 @@ if __name__ == '__main__':
         description='''evaluates models on legal instruction finetuning''')
     parser.add_argument('--dataset', type=str, required=True, help='dataset_name')
     parser.add_argument('--data_config', type=str, required=False, help='data_config')
+    parser.add_argument('--field', type=str, required=False, help='field')
     args = parser.parse_args()
     run(args)
