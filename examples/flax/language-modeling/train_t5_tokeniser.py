@@ -52,7 +52,7 @@ def run(args):
     config.save_pretrained("./LegalT5-base")
 
     while True:
-        print("process finished")
+        print(f"process finished")
         time.sleep(5)
 
 
