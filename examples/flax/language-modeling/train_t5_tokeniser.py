@@ -44,13 +44,12 @@ def run(args):
     print(f'Time taken: {time_taken_timedelta}')
 
     # Save files to disk
-    tokenizer.save("./LegalT5-base/tokenizer.json")
+    tokenizer.save(f"{args.path_to_save}/tokenizer.json")
 
-    # from transformers imporLegalT5-baset T5Config
+    config = T5Config.from_pretrained(args.config_name, vocab_size=tokenizer.get_vocab_size())
+    config.save_pretrained(args.path_to_save)
 
-    config = T5Config.from_pretrained("google/t5-v1_1-base", vocab_size=tokenizer.get_vocab_size())
-    config.save_pretrained("./LegalT5-base")
-
+    print(f"process finished")
     while True:
         print(f"process finished")
         time.sleep(5)
@@ -60,8 +59,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='''evaluates models on legal instruction finetuning''')
     parser.add_argument('--dataset', type=str, required=True, help='dataset_name')
+    parser.add_argument('--config_name', type=str, default='google/t5-v1_1-base', required=False, help='config_name')
     parser.add_argument('--data_config', type=str, required=False, help='data_config')
     parser.add_argument('--field', type=str, default='text', required=False, help='field')
     parser.add_argument('--batch_size', type=int, default=100, required=False, help='field')
+    parser.add_argument('--path_to_save', type=str, default='./LegalT5-base', required=False, help='path_to_save')
     args = parser.parse_args()
     run(args)
