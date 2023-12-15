@@ -1,3 +1,6 @@
+import time
+from datetime import timedelta
+
 import datasets
 
 from t5_tokenizer_model import SentencePieceUnigramTokenizer
@@ -7,7 +10,7 @@ vocab_size = 32_000
 input_sentence_size = None
 
 # Initialize a dataset
-dataset = datasets.load_dataset("joelniklaus/Multi_Legal_Pile", name="en_legislation", split="train",cache_dir='/experiments/dpremasiri/transformers/examples/flax/language-modeling/cache/')
+dataset = datasets.load_dataset("joelniklaus/Multi_Legal_Pile", name="bg_legislation", split="train")
 
 tokenizer = SentencePieceUnigramTokenizer(unk_token="<unk>", eos_token="</s>", pad_token="<pad>")
 
@@ -21,12 +24,20 @@ def batch_iterator(input_sentence_size=None):
         yield dataset[i: i + batch_length]["text"]
 
 
+start = time.time()
 # Train tokenizer
 tokenizer.train_from_iterator(
     iterator=batch_iterator(input_sentence_size=input_sentence_size),
     vocab_size=vocab_size,
     show_progress=True,
 )
+
+end = time.time()
+
+time_taken_timedelta = timedelta(seconds=end - start)
+
+# Print the result in a human-readable format
+print(f'Time taken: {time_taken_timedelta}')
 
 # Save files to disk
 tokenizer.save("./LegalT5-base/tokenizer.json")
@@ -35,3 +46,7 @@ tokenizer.save("./LegalT5-base/tokenizer.json")
 
 config = T5Config.from_pretrained("google/t5-v1_1-base", vocab_size=tokenizer.get_vocab_size())
 config.save_pretrained("./LegalT5-base")
+
+while True:
+    print("process finished")
+    time.sleep(5)
