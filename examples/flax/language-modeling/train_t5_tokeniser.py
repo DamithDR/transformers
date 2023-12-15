@@ -24,7 +24,7 @@ def run(args):
     def batch_iterator(input_sentence_size=None):
         if input_sentence_size is None:
             input_sentence_size = len(dataset)
-        batch_length = 100
+        batch_length = args.batch_size
         for i in range(0, input_sentence_size, batch_length):
             yield dataset[i: i + batch_length][args.field]
 
@@ -62,5 +62,6 @@ if __name__ == '__main__':
     parser.add_argument('--dataset', type=str, required=True, help='dataset_name')
     parser.add_argument('--data_config', type=str, required=False, help='data_config')
     parser.add_argument('--field', type=str, default='text', required=False, help='field')
+    parser.add_argument('--batch_size', type=int, default=100, required=False, help='field')
     args = parser.parse_args()
     run(args)
