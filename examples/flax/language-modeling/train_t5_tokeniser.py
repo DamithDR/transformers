@@ -61,6 +61,6 @@ if __name__ == '__main__':
         description='''evaluates models on legal instruction finetuning''')
     parser.add_argument('--dataset', type=str, required=True, help='dataset_name')
     parser.add_argument('--data_config', type=str, required=False, help='data_config')
-    parser.add_argument('--field', type=str, required=False, help='field')
+    parser.add_argument('--field', type=str, default='text', required=False, help='field')
     args = parser.parse_args()
     run(args)
