@@ -3,6 +3,7 @@ import time
 from datetime import timedelta
 
 import datasets
+import pandas as pd
 
 from t5_tokenizer_model import SentencePieceUnigramTokenizer
 from transformers import T5Config
@@ -13,10 +14,13 @@ def run(args):
     input_sentence_size = None
 
     # Initialize a dataset
-    if args.data_config:
-        dataset = datasets.load_dataset(args.dataset, name=args.data_config, split="train")
-    else:
-        dataset = datasets.load_dataset(args.dataset, split="train")
+    # if args.data_config:
+    #     dataset = datasets.load_dataset(args.dataset, name=args.data_config, split="train")
+    # else:
+    #     dataset = datasets.load_dataset(args.dataset, split="train")
+    files_list = [f'en_all_filtered_1024_part_{i}' for i in range(1, 18)]
+    dataframes = [pd.read_csv(f'data_files/{file}') for file in files_list]
+    dataset = pd.concat(dataframes)
 
     tokenizer = SentencePieceUnigramTokenizer(unk_token="<unk>", eos_token="</s>", pad_token="<pad>")
 
@@ -58,7 +62,7 @@ def run(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='''evaluates models on legal instruction finetuning''')
-    parser.add_argument('--dataset', type=str, required=True, help='dataset_name')
+    # parser.add_argument('--dataset', type=str, required=True, help='dataset_name')
     parser.add_argument('--config_name', type=str, default='google/t5-v1_1-base', required=False, help='config_name')
     parser.add_argument('--data_config', type=str, required=False, help='data_config')
     parser.add_argument('--field', type=str, default='text', required=False, help='field')
