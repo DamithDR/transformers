@@ -19,7 +19,7 @@ def run(args):
     # else:
     #     dataset = datasets.load_dataset(args.dataset, split="train")
     files_list = [f'en_all_filtered_1024_part_{i}.tsv' for i in range(1, 18)]
-    dataframes = [pd.read_csv(f'data_files/{file}') for file in files_list]
+    dataframes = [pd.read_csv(f'data_files/{file}', sep='\t') for file in files_list]
     dataset = pd.concat(dataframes)
 
     tokenizer = SentencePieceUnigramTokenizer(unk_token="<unk>", eos_token="</s>", pad_token="<pad>")
