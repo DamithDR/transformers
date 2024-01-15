@@ -18,7 +18,7 @@ def run(args):
     #     dataset = datasets.load_dataset(args.dataset, name=args.data_config, split="train")
     # else:
     #     dataset = datasets.load_dataset(args.dataset, split="train")
-    files_list = [f'en_all_filtered_1024_part_{i}' for i in range(1, 18)]
+    files_list = [f'en_all_filtered_1024_part_{i}.tsv' for i in range(1, 18)]
     dataframes = [pd.read_csv(f'data_files/{file}') for file in files_list]
     dataset = pd.concat(dataframes)
 
