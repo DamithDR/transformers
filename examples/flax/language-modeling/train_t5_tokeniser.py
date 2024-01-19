@@ -4,6 +4,7 @@ from datetime import timedelta
 
 import datasets
 import pandas as pd
+from datasets import Dataset
 
 from t5_tokenizer_model import SentencePieceUnigramTokenizer
 from transformers import T5Config
@@ -20,7 +21,8 @@ def run(args):
     #     dataset = datasets.load_dataset(args.dataset, split="train")
     files_list = [f'en_all_filtered_1024_part_{i}.tsv' for i in range(1, 18)]
     dataframes = [pd.read_csv(f'data_files/{file}', sep='\t') for file in files_list]
-    dataset = pd.concat(dataframes)
+    df = pd.concat(dataframes)
+    dataset = Dataset.from_pandas(df)
 
     tokenizer = SentencePieceUnigramTokenizer(unk_token="<unk>", eos_token="</s>", pad_token="<pad>")
 
