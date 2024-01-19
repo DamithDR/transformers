@@ -68,7 +68,7 @@ if __name__ == '__main__':
     parser.add_argument('--config_name', type=str, default='google/t5-v1_1-base', required=False, help='config_name')
     parser.add_argument('--data_config', type=str, required=False, help='data_config')
     parser.add_argument('--field', type=str, default='text', required=False, help='field')
-    parser.add_argument('--batch_size', type=int, default=100, required=False, help='field')
+    parser.add_argument('--batch_size', type=int, default=100, required=False, help='batch_size')
     parser.add_argument('--path_to_save', type=str, default='./LegalT5-base', required=False, help='path_to_save')
     args = parser.parse_args()
     run(args)
