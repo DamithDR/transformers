@@ -22,6 +22,7 @@ def run(args):
     files_list = [f'en_all_filtered_1024_part_{i}.tsv' for i in range(1, 17)]
     dataframes = [pd.read_csv(f'data_files/{file}', sep='\t') for file in files_list]
     df = pd.concat(dataframes, ignore_index=True)
+    df = df.dropna()
     dataset = Dataset.from_pandas(df)
 
     tokenizer = SentencePieceUnigramTokenizer(unk_token="<unk>", eos_token="</s>", pad_token="<pad>")
