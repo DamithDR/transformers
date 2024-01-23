@@ -19,7 +19,7 @@ def run(args):
     #     dataset = datasets.load_dataset(args.dataset, name=args.data_config, split="train")
     # else:
     #     dataset = datasets.load_dataset(args.dataset, split="train")
-    files_list = [f'en_all_filtered_1024_part_{i}.tsv' for i in range(1, 17)]
+    files_list = [f'en_all_filtered_1024_part_{i}.tsv' for i in range(1, 18)]
     dataframes = [pd.read_csv(f'data_files/{file}', sep='\t') for file in files_list]
     df = pd.concat(dataframes, ignore_index=True)
     df = df.dropna(how='all')
@@ -57,9 +57,6 @@ def run(args):
     config.save_pretrained(args.path_to_save)
 
     print(f"process finished")
-    while True:
-        print(f"process finished")
-        time.sleep(5)
 
 
 if __name__ == '__main__':
