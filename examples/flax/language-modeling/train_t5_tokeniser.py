@@ -11,7 +11,7 @@ from transformers import T5Config
 
 
 def run(args):
-    vocab_size = 64_000
+    vocab_size = 128_000
     input_sentence_size = None
 
     # Initialize a dataset
